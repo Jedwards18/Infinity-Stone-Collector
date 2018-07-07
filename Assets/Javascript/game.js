@@ -4,11 +4,9 @@ $(document).ready(function() {
     var lossCounter = 0;
     var playerNumber = 0
 
-    //ssign random value for computer on load
-    function randomComputerNumber() {
-        var computerNumber = [Math.floor(Math.random() * (121 - 19 + 1)) + 19]
-        $("#number-to-guess").val(computerNumber);
-    }
+    //Assign random value for computer on load
+    var computerNumber = [Math.floor(Math.random() * (121 - 19 + 1)) + 19]
+    $("#number-to-guess").val(computerNumber);
 
     //Function to assign different random value to each crystal
     function calculateCrystalValue() {
@@ -16,8 +14,9 @@ $(document).ready(function() {
             $(this).attr("value", [Math.floor(Math.random() * (12 - 1 + 1)) + 1]);
         });
     }
+    calculateCrystalValue();
 
-    //On click function to add player score
+    //On click function to add player score and execute rules of the game
     $(".crystal").on("click", function() {
         crystalValue = $(this).attr("value");
         playerNumber += parseInt(crystalValue);
@@ -27,12 +26,8 @@ $(document).ready(function() {
             ++winsCounter;
             $("#wins").val(winsCounter);
             playerNumber = 0;
-            //computerNumber = [Math.floor(Math.random() * (121 - 19 + 1)) + 1];
-            //$("#number-to-guess").val(computerNumber);
-            //$(".crystal").each(function() {
-                //$(this).attr("value", [Math.floor(Math.random() * (12 - 1 + 1)) + 1]);
-            //});
-            randomComputerNumber();
+            computerNumber = [Math.floor(Math.random() * (121 - 19 + 1)) + 1];
+            $("#number-to-guess").val(computerNumber);
             calculateCrystalValue();
         }
         else if (playerNumber > computerNumber) {
@@ -40,12 +35,11 @@ $(document).ready(function() {
             ++lossCounter;
             $("#losses").val(lossCounter);
             playerNumber = 0;
-            //computerNumber = [Math.floor(Math.random() * (121 - 19 + 1)) + 1];
-            //$("#number-to-guess").val(computerNumber);
-            //$(".crystal").each(function() {
-                //$(this).attr("value", [Math.floor(Math.random() * (12 - 1 + 1)) + 1]);
-            //});
+            computerNumber = [Math.floor(Math.random() * (121 - 19 + 1)) + 1];
+            $("#number-to-guess").val(computerNumber);
+            calculateCrystalValue();
         }
         $("#player-score").val(playerNumber);
     })
 })
+
